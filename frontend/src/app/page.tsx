@@ -77,39 +77,38 @@ export default function Home() {
   };
 
   const uploadComplete = (results:any) => {
-    console.log("Parsing complete! Results:\n",results)
-    //results .data
     setCards(results.data)
     //results .error
-    //send to server
-    //set card's contents
   }
 
   return (
     <main className="flex min-h-screen flex-col items-center p-0 bg-gray-800">
       <div className="max-w-5xl w-full min-h-screen p-0 m-0 bg-zinc-200">
         <div className="z-10 w-full max-w-5xl items-center justify-between font-mono lg:flex bg-zinc-800 p-1 lg:p-0">
-          <div className="m-2 lg:m-1">
-            <input className="border-1 border-white bg-white h-10 rounded-lg text-black p-1 mr-0 outline-none w-full lg:w-[350px] lg:w-auto" placeholder="Search..." onChange={handlesSearchInput} />
+          <div className="m-2 lg:m-2">
+            <input className="border-1 border-white bg-white h-10 rounded-lg text-black p-1 mr-0 outline-none w-full lg:w-[300px] lg:w-auto" placeholder="Search..." onChange={handlesSearchInput} />
           </div>
-          <div className="m-2 lg:m-1">
+          <div className="m-2 lg:m-2">
             <input type="file"
               ref={hiddenFileInput}
               onChange={handleFileInputChange}
               accept=".csv"
               style={{ display: 'none' }}
             />
-            <button className="border-2 border-blue-600 bg-blue-600 h-10 px-5 rounded-lg w-full lg:w-auto" onClick={handleUploadButton}>
+            <button className="border-2 border-blue-600 bg-blue-600 h-10 px-5 font-semibold rounded-lg w-full lg:w-auto" onClick={handleUploadButton}>
               Upload
             </button>
           </div>
           
         </div>
 
+        {(cards.length == 0) && <div className="text-black p-3">Use the &pos;Upload&pos; button above to send a CSV file, then use the search bar above to search for content inside it.</div>}
+
         <div className="mb-32 grid text-center lg:mb-0 lg:w-full max-w-5xl lg:grid-cols-4 lg:text-left bg-zinc-200 text-black p-1">
+          
           {
             cards.map((card,i) =>
-              <div className="min-h-20 rounded-lg bg-white m-2 p-2" key={i}>
+              <div className="min-h-20 rounded-lg bg-white m-2 p-2 shadow-md" key={i}>
                 
                 {Object.keys(card).map((el,j)=>(
                   <div key={j}>
